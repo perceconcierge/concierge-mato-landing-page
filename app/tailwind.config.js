@@ -78,7 +78,9 @@ module.exports = {
       fontFamily: {
         heading: ['Paytone One', 'sans-serif'],
         script: ['Caveat', 'cursive'],
+        handwritten: ['Meow Script', 'cursive'],
         body: ['Inter', 'sans-serif'],
+        subtext: ['DM Sans', 'sans-serif'],
       },
       keyframes: {
         "accordion-down": {

@@ -22,7 +22,7 @@ const Navigation = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => scrollToSection('faq')}
-            className="px-4 sm:px-5 py-2 bg-white text-mato-red-dark rounded-full text-xs sm:text-sm font-semibold uppercase tracking-wide border-2 border-mato-red/20 hover:bg-mato-cream transition-colors shadow-sm"
+            className="px-4 sm:px-5 py-2 bg-white/90 backdrop-blur-sm text-mato-red-dark rounded-full text-xs sm:text-sm font-semibold uppercase tracking-wide border-2 border-mato-red/30 hover:bg-white hover:border-mato-red/50 transition-all shadow-md"
           >
             FAQs
           </motion.button>
@@ -30,25 +30,25 @@ const Navigation = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => scrollToSection('about')}
-            className="px-4 sm:px-5 py-2 bg-white text-mato-red-dark rounded-full text-xs sm:text-sm font-semibold uppercase tracking-wide border-2 border-mato-red/20 hover:bg-mato-cream transition-colors shadow-sm"
+            className="px-4 sm:px-5 py-2 bg-white/90 backdrop-blur-sm text-mato-red-dark rounded-full text-xs sm:text-sm font-semibold uppercase tracking-wide border-2 border-mato-red/30 hover:bg-white hover:border-mato-red/50 transition-all shadow-md"
           >
             About
           </motion.button>
         </div>
 
         {/* Center Logo */}
-        <motion.div
-          whileHover={{ scale: 1.1 }}
-          className="absolute left-1/2 transform -translate-x-1/2"
-        >
-          <div className="w-10 h-10 sm:w-12 sm:h-12 bg-mato-red rounded-2xl flex items-center justify-center border-2 border-white shadow-lg cursor-pointer overflow-hidden">
-            <img 
-              src="/images/mato/char_peeking.png" 
-              alt="Mato" 
+        <div className="absolute left-1/2 transform -translate-x-1/2">
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            className="w-10 h-10 sm:w-12 sm:h-12 bg-mato-red rounded-2xl flex items-center justify-center border-2 border-white shadow-lg cursor-pointer overflow-hidden"
+          >
+            <img
+              src="/images/mato/char_peeking.png"
+              alt="Mato"
               className="w-full h-full object-cover"
             />
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
 
         {/* Right Navigation */}
         <div className="flex items-center gap-2 sm:gap-3">
@@ -56,7 +56,7 @@ const Navigation = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => scrollToSection('contact')}
-            className="px-4 sm:px-5 py-2 bg-mato-green text-white rounded-full text-xs sm:text-sm font-semibold uppercase tracking-wide border-2 border-mato-green-dark hover:bg-mato-green-dark transition-colors shadow-sm"
+            className="px-4 sm:px-5 py-2 bg-white/90 backdrop-blur-sm text-mato-green-dark rounded-full text-xs sm:text-sm font-semibold uppercase tracking-wide border-2 border-mato-green/50 hover:bg-white hover:border-mato-green transition-all shadow-md"
           >
             Contact
           </motion.button>
@@ -64,7 +64,7 @@ const Navigation = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => scrollToSection('download')}
-            className="px-4 sm:px-5 py-2 bg-mato-yellow text-mato-dark rounded-full text-xs sm:text-sm font-semibold uppercase tracking-wide border-2 border-mato-yellow hover:brightness-110 transition-all shadow-sm"
+            className="px-4 sm:px-5 py-2 bg-mato-red text-white rounded-full text-xs sm:text-sm font-semibold uppercase tracking-wide border-2 border-mato-red-dark hover:bg-mato-red-dark transition-all shadow-md"
           >
             Download
           </motion.button>
