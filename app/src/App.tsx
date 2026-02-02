@@ -1,0 +1,54 @@
+import { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import Navigation from './components/Navigation';
+import LogoReveal from './sections/LogoReveal';
+import HeroSection from './sections/HeroSection';
+import CardStackSection from './sections/CardStackSection';
+import StepsCarousel from './sections/StepsCarousel';
+import SmileyFaceSection from './sections/SmileyFaceSection';
+import TestimonialsSection from './sections/TestimonialsSection';
+import PricingSection from './sections/PricingSection';
+import FinalCTA from './sections/FinalCTA';
+
+function App() {
+  const [showLogoReveal, setShowLogoReveal] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowLogoReveal(false);
+    }, 2500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <div className="relative overflow-x-hidden bg-mato-cream">
+      <AnimatePresence>
+        {showLogoReveal && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className="fixed inset-0 z-50"
+          >
+            <LogoReveal onComplete={() => setShowLogoReveal(false)} />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <Navigation />
+      
+      <main className="relative">
+        <HeroSection />
+        <CardStackSection />
+        <StepsCarousel />
+        <SmileyFaceSection />
+        <TestimonialsSection />
+        <PricingSection />
+        <FinalCTA />
+      </main>
+    </div>
+  );
+}
+
+export default App;
