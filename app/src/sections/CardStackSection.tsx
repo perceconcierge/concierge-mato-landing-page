@@ -1,102 +1,162 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 const CardStackSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start end', 'end start'],
+    offset: ["start end", "end start"],
   });
 
-  // Cards fan out as you scroll
-  const card1X = useTransform(scrollYProgress, [0, 0.5], [0, -120]);
-  const card1Rotate = useTransform(scrollYProgress, [0, 0.5], [0, -15]);
-  
-  const card2X = useTransform(scrollYProgress, [0, 0.5], [0, 0]);
-  const card2Rotate = useTransform(scrollYProgress, [0, 0.5], [0, 0]);
-  
-  const card3X = useTransform(scrollYProgress, [0, 0.5], [0, 120]);
-  const card3Rotate = useTransform(scrollYProgress, [0, 0.5], [0, 15]);
+  // Card fan-out animations based on scroll - cards fully separate as user scrolls
+  // Card 1 - Far left
+  const card1X = useTransform(
+    scrollYProgress,
+    [0.05, 0.25, 0.45],
+    [0, -120, -280],
+  );
+  const card1Rotate = useTransform(
+    scrollYProgress,
+    [0.05, 0.25, 0.45],
+    [2, -10, -22],
+  );
+  const card1Y = useTransform(scrollYProgress, [0.05, 0.25, 0.45], [0, 15, 40]);
+
+  // Card 2 - Left of center
+  const card2X = useTransform(
+    scrollYProgress,
+    [0.05, 0.25, 0.45],
+    [0, -40, -95],
+  );
+  const card2Rotate = useTransform(
+    scrollYProgress,
+    [0.05, 0.25, 0.45],
+    [1, -4, -8],
+  );
+  const card2Y = useTransform(scrollYProgress, [0.05, 0.25, 0.45], [0, 5, 15]);
+
+  // Card 3 - Right of center
+  const card3X = useTransform(scrollYProgress, [0.05, 0.25, 0.45], [0, 40, 95]);
+  const card3Rotate = useTransform(
+    scrollYProgress,
+    [0.05, 0.25, 0.45],
+    [-1, 4, 8],
+  );
+  const card3Y = useTransform(scrollYProgress, [0.05, 0.25, 0.45], [0, 5, 15]);
+
+  // Card 4 - Far right
+  const card4X = useTransform(
+    scrollYProgress,
+    [0.05, 0.25, 0.45],
+    [0, 120, 280],
+  );
+  const card4Rotate = useTransform(
+    scrollYProgress,
+    [0.05, 0.25, 0.45],
+    [-2, 10, 22],
+  );
+  const card4Y = useTransform(scrollYProgress, [0.05, 0.25, 0.45], [0, 15, 40]);
+
+  const cards = [
+    {
+      image: "/images/phones/phone-home.png",
+      x: card1X,
+      rotate: card1Rotate,
+      y: card1Y,
+      zIndex: 40,
+      initialOffset: -6,
+    },
+    {
+      image: "/images/phones/phone-map.png",
+      x: card2X,
+      rotate: card2Rotate,
+      y: card2Y,
+      zIndex: 30,
+      initialOffset: -2,
+    },
+    {
+      image: "/images/phones/phone-detail.png",
+      x: card3X,
+      rotate: card3Rotate,
+      y: card3Y,
+      zIndex: 20,
+      initialOffset: 2,
+    },
+    {
+      image: "/images/phones/phone-favorites.png",
+      x: card4X,
+      rotate: card4Rotate,
+      y: card4Y,
+      zIndex: 10,
+      initialOffset: 6,
+    },
+  ];
 
   return (
-    <section 
-      ref={sectionRef} 
-      className="relative min-h-[80vh] bg-mato-cream py-20 sm:py-32 overflow-hidden"
-    >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Title */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl text-mato-dark-green mb-4">
-            YOUR TABLE AWAITS
-          </h2>
-          <p className="font-script text-xl sm:text-2xl text-mato-red">
-            swipe through, tap to book
-          </p>
-        </motion.div>
-
-        {/* Card Stack */}
-        <div className="relative h-[500px] sm:h-[600px] flex items-center justify-center">
-          {/* Card 1 - Left */}
+    <section ref={sectionRef} className="relative -mt-32 sm:-mt-40 lg:-mt-48">
+      {/* Cards container - positioned to peek into the hero section */}
+      <div className="relative z-10 flex justify-center items-end h-[280px] sm:h-[320px] lg:h-[380px] pt-24 sm:pt-32 lg:pt-40">
+        {cards.map((card, index) => (
           <motion.div
-            style={{ x: card1X, rotate: card1Rotate }}
-            className="absolute w-56 sm:w-72 lg:w-80"
+            key={index}
+            style={{
+              x: card.x,
+              rotate: card.rotate,
+              y: card.y,
+              zIndex: card.zIndex,
+            }}
+            className="absolute"
           >
-            <div className="bg-white rounded-[32px] shadow-2xl overflow-hidden border-4 border-mato-red/20 transform origin-bottom">
-              <img 
-                src="/images/phones/phone-home.png" 
-                alt="Mato app home" 
-                className="w-full h-auto"
-              />
-            </div>
+            <motion.div
+              initial={{
+                y: 100,
+                opacity: 0,
+                rotate: card.initialOffset,
+              }}
+              whileInView={{
+                y: 0,
+                opacity: 1,
+                rotate: card.initialOffset,
+              }}
+              viewport={{ once: true }}
+              transition={{
+                delay: index * 0.1,
+                duration: 0.6,
+                ease: "easeOut",
+              }}
+              className="w-44 sm:w-56 lg:w-64 xl:w-72"
+            >
+              <div className="bg-white rounded-[24px] sm:rounded-[32px] shadow-2xl overflow-hidden border-[3px] border-gray-200/50">
+                <img
+                  src={card.image}
+                  alt={`Mato app screen ${index + 1}`}
+                  className="w-full h-auto"
+                />
+              </div>
+            </motion.div>
           </motion.div>
+        ))}
+      </div>
 
-          {/* Card 2 - Center (main) */}
+      {/* Cream/white rounded sheet background */}
+      <div className="bg-mato-green px-4 sm:px-6 lg:px-12">
+        <div className="bg-mato-cream rounded-t-[48px] sm:rounded-t-[64px] -mt-40 sm:-mt-48 lg:-mt-56 pt-48 sm:pt-56 lg:pt-64 pb-24 sm:pb-32 relative">
           <motion.div
-            style={{ x: card2X, rotate: card2Rotate }}
-            className="absolute w-60 sm:w-76 lg:w-84 z-10"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center px-4 mt-16 sm:mt-20 lg:mt-24"
           >
-            <div className="bg-white rounded-[32px] shadow-2xl overflow-hidden border-4 border-mato-green/30 transform origin-bottom">
-              <img 
-                src="/images/phones/phone-map.png" 
-                alt="Mato app map" 
-                className="w-full h-auto"
-              />
-            </div>
-          </motion.div>
-
-          {/* Card 3 - Right */}
-          <motion.div
-            style={{ x: card3X, rotate: card3Rotate }}
-            className="absolute w-56 sm:w-72 lg:w-80"
-          >
-            <div className="bg-white rounded-[32px] shadow-2xl overflow-hidden border-4 border-mato-orange/30 transform origin-bottom">
-              <img 
-                src="/images/phones/phone-detail.png" 
-                alt="Mato app detail" 
-                className="w-full h-auto"
-              />
-            </div>
+            <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-mato-dark-green leading-tight">
+              Curated by locals.
+              <br />
+              For travel foodies.
+              <br />
+              No more long queues.
+            </h2>
           </motion.div>
         </div>
-
-        {/* Scroll hint */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.5, duration: 0.6 }}
-          className="text-center mt-8"
-        >
-          <p className="font-script text-lg text-mato-dark-green/60">
-            scroll to see more
-          </p>
-        </motion.div>
       </div>
     </section>
   );
