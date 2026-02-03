@@ -71,7 +71,7 @@ const TestimonialsSection = () => {
           <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl text-white mb-2">
             LOVED BY FOODIES
           </h2>
-          <p className="font-script text-xl sm:text-2xl text-white/80">
+          <p className="text-xl sm:text-2xl text-white/80">
             5-star average rating
           </p>
         </motion.div>

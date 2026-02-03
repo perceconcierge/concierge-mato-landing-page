@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
-import { Check, Apple } from 'lucide-react';
+import { motion } from "framer-motion";
+import { Check, Apple } from "lucide-react";
 
 const PricingSection = () => {
   return (
@@ -16,7 +16,7 @@ const PricingSection = () => {
           <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl text-mato-dark-green mb-4">
             SIMPLE PRICING
           </h2>
-          <p className="font-script text-xl sm:text-2xl text-mato-red">
+          <p className="text-xl sm:text-2xl text-mato-red">
             one price, endless discoveries
           </p>
         </motion.div>
@@ -35,11 +35,15 @@ const PricingSection = () => {
               initial={{ opacity: 0, scale: 0.5 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.3, duration: 0.5, type: 'spring' }}
+              transition={{ delay: 0.3, duration: 0.5, type: "spring" }}
               className="mb-6"
             >
-              <span className="font-heading text-6xl sm:text-7xl md:text-8xl text-mato-red">$9</span>
-              <span className="text-xl sm:text-2xl text-mato-dark-green/60 ml-2">/ trip</span>
+              <span className="font-heading text-6xl sm:text-7xl md:text-8xl text-mato-red">
+                $9
+              </span>
+              <span className="text-xl sm:text-2xl text-mato-dark-green/60 ml-2">
+                / trip
+              </span>
             </motion.div>
 
             {/* Description */}
@@ -50,11 +54,11 @@ const PricingSection = () => {
             {/* Features */}
             <div className="space-y-4 mb-8 text-left max-w-md mx-auto">
               {[
-                'Unlimited restaurant recommendations',
-                'Human-confirmed availability',
-                'Instant booking confirmation',
-                '24/7 concierge support',
-                'Local insider tips',
+                "Unlimited restaurant recommendations",
+                "Human-confirmed availability",
+                "Instant booking confirmation",
+                "24/7 concierge support",
+                "Local insider tips",
               ].map((feature, index) => (
                 <motion.div
                   key={index}

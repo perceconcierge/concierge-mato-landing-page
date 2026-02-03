@@ -99,7 +99,7 @@ const StepsCarousel = () => {
   });
 
   // Smiley rises from bottom - animation completes at end of scroll to avoid "stuck" feeling
-  const smileyY = useTransform(scrollYProgress, [0.7, 1], ["85%", "0%"]);
+  const smileyY = useTransform(scrollYProgress, [0.7, 1], ["90%", "0%"]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {

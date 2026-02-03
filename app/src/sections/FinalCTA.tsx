@@ -1,18 +1,18 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef, useEffect, useState } from 'react';
-import { Apple } from 'lucide-react';
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef, useEffect, useState } from "react";
+import { Apple } from "lucide-react";
 
 const FinalCTA = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start end', 'center center'],
+    offset: ["start end", "center center"],
   });
 
   // Face reveals from bottom as you scroll
-  const faceY = useTransform(scrollYProgress, [0, 1], ['100%', '-30%']);
+  const faceY = useTransform(scrollYProgress, [0, 1], ["100%", "0%"]);
   const contentOpacity = useTransform(scrollYProgress, [0.3, 0.7], [0, 1]);
 
   useEffect(() => {
@@ -21,12 +21,15 @@ const FinalCTA = () => {
       if (rect) {
         const x = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2);
         const y = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
-        setMousePosition({ x: Math.max(-1, Math.min(1, x)), y: Math.max(-1, Math.min(1, y)) });
+        setMousePosition({
+          x: Math.max(-1, Math.min(1, x)),
+          y: Math.max(-1, Math.min(1, y)),
+        });
       }
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
   // Calculate eye movement
@@ -34,15 +37,15 @@ const FinalCTA = () => {
   const eyeOffsetY = mousePosition.y * 15;
 
   return (
-    <section 
-      ref={sectionRef} 
+    <section
+      ref={sectionRef}
       id="download"
       className="relative min-h-screen overflow-hidden bg-mato-green"
     >
       {/* Content */}
       <motion.div
         style={{ opacity: contentOpacity }}
-        className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-48 text-center"
+        className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-80 pb-48 text-center"
       >
         <motion.h2
           initial={{ opacity: 0, y: 40 }}
@@ -55,7 +58,7 @@ const FinalCTA = () => {
           <br />
           LIKE A LOCAL?
         </motion.h2>
-        
+
         <motion.p
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -90,41 +93,41 @@ const FinalCTA = () => {
           <div className="flex gap-12 sm:gap-20 lg:gap-28">
             {/* Left Eye */}
             <motion.div
-              animate={{ 
+              animate={{
                 scaleY: [1, 0.1, 1],
               }}
-              transition={{ 
-                duration: 0.25, 
-                repeat: Infinity, 
+              transition={{
+                duration: 0.25,
+                repeat: Infinity,
                 repeatDelay: 1.5,
-                ease: 'easeInOut'
+                ease: "easeInOut",
               }}
               className="w-14 h-14 sm:w-20 sm:h-20 lg:w-28 lg:h-28 bg-mato-dark-green rounded-full relative overflow-hidden"
             >
               <motion.div
                 animate={{ x: eyeOffsetX, y: eyeOffsetY }}
-                transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+                transition={{ type: "spring", stiffness: 200, damping: 20 }}
                 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-5 h-5 sm:w-7 sm:h-7 lg:w-9 lg:h-9 bg-white rounded-full"
               />
             </motion.div>
 
             {/* Right Eye */}
             <motion.div
-              animate={{ 
+              animate={{
                 scaleY: [1, 0.1, 1],
               }}
-              transition={{ 
-                duration: 0.25, 
-                repeat: Infinity, 
+              transition={{
+                duration: 0.25,
+                repeat: Infinity,
                 repeatDelay: 1.5,
-                ease: 'easeInOut',
-                delay: 0.03
+                ease: "easeInOut",
+                delay: 0.03,
               }}
               className="w-14 h-14 sm:w-20 sm:h-20 lg:w-28 lg:h-28 bg-mato-dark-green rounded-full relative overflow-hidden"
             >
               <motion.div
                 animate={{ x: eyeOffsetX, y: eyeOffsetY }}
-                transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+                transition={{ type: "spring", stiffness: 200, damping: 20 }}
                 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-5 h-5 sm:w-7 sm:h-7 lg:w-9 lg:h-9 bg-white rounded-full"
               />
             </motion.div>
@@ -132,7 +135,7 @@ const FinalCTA = () => {
 
           {/* Smile */}
           <div className="absolute top-[25%] left-1/2 transform -translate-x-1/2">
-            <div className="w-20 h-10 sm:w-28 sm:h-14 lg:w-36 lg:h-16 bg-mato-dark-green rounded-b-full" />
+            <div className="w-14 h-7 sm:w-20 sm:h-10 lg:w-24 lg:h-12 bg-mato-dark-green rounded-b-full" />
           </div>
         </div>
       </motion.div>
@@ -142,8 +145,18 @@ const FinalCTA = () => {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           <p className="text-white/60 text-sm">© 2025 Concierge</p>
           <div className="flex gap-4">
-            <a href="#" className="text-white/60 hover:text-white text-sm transition-colors">Privacy</a>
-            <a href="#" className="text-white/60 hover:text-white text-sm transition-colors">Terms</a>
+            <a
+              href="#"
+              className="text-white/60 hover:text-white text-sm transition-colors"
+            >
+              Privacy
+            </a>
+            <a
+              href="#"
+              className="text-white/60 hover:text-white text-sm transition-colors"
+            >
+              Terms
+            </a>
           </div>
         </div>
       </div>
