@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navigation from './components/Navigation';
+import SmoothScrollProvider from './components/SmoothScrollProvider';
 import LogoReveal from './sections/LogoReveal';
 import HeroSection from './sections/HeroSection';
 import CardStackSection from './sections/CardStackSection';
@@ -22,32 +23,34 @@ function App() {
   }, []);
 
   return (
-    <div className="relative overflow-x-hidden bg-mato-cream">
-      <AnimatePresence>
-        {showLogoReveal && (
-          <motion.div
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-            className="fixed inset-0 z-50"
-          >
-            <LogoReveal onComplete={() => setShowLogoReveal(false)} />
-          </motion.div>
-        )}
-      </AnimatePresence>
+    <SmoothScrollProvider>
+      <div className="relative overflow-x-clip bg-mato-cream">
+        <AnimatePresence>
+          {showLogoReveal && (
+            <motion.div
+              initial={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className="fixed inset-0 z-50"
+            >
+              <LogoReveal onComplete={() => setShowLogoReveal(false)} />
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-      <Navigation />
-      
-      <main className="relative">
-        <HeroSection />
-        <CardStackSection />
-        <StepsCarousel />
-        <SmileyFaceSection />
-        <TestimonialsSection />
-        <PricingSection />
-        <FinalCTA />
-      </main>
-    </div>
+        <Navigation />
+
+        <main className="relative">
+          <HeroSection />
+          <CardStackSection />
+          <StepsCarousel />
+          <SmileyFaceSection />
+          <TestimonialsSection />
+          <PricingSection />
+          <FinalCTA />
+        </main>
+      </div>
+    </SmoothScrollProvider>
   );
 }
 
