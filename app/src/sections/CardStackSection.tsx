@@ -109,20 +109,22 @@ const CardStackSection = () => {
           >
             <motion.div
               initial={{
-                y: 100,
+                scale: 0,
+                y: 60,
                 opacity: 0,
                 rotate: card.initialOffset,
               }}
-              whileInView={{
+              animate={{
+                scale: 1,
                 y: 0,
                 opacity: 1,
                 rotate: card.initialOffset,
               }}
-              viewport={{ once: true }}
               transition={{
-                delay: index * 0.1,
-                duration: 0.6,
-                ease: "easeOut",
+                delay: 3.5 + index * 0.15,
+                type: "spring",
+                stiffness: 260,
+                damping: 20,
               }}
               className="w-44 sm:w-56 lg:w-64 xl:w-72"
             >
