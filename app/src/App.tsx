@@ -6,7 +6,6 @@ import LogoReveal from './sections/LogoReveal';
 import HeroSection from './sections/HeroSection';
 import CardStackSection from './sections/CardStackSection';
 import StepsCarousel from './sections/StepsCarousel';
-import SmileyFaceSection from './sections/SmileyFaceSection';
 import TestimonialsSection from './sections/TestimonialsSection';
 import PricingSection from './sections/PricingSection';
 import FinalCTA from './sections/FinalCTA';
@@ -44,7 +43,6 @@ function App() {
           <HeroSection />
           <CardStackSection />
           <StepsCarousel />
-          <SmileyFaceSection />
           <TestimonialsSection />
           <PricingSection />
           <FinalCTA />

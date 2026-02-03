@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 
 interface Step {
   id: number;
@@ -89,14 +89,37 @@ const StepCard = ({ i, step, progress, range, targetScale }: StepCardProps) => {
 };
 
 const StepsCarousel = () => {
+  const sectionRef = useRef<HTMLElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
   });
 
+  // Smiley rises from bottom - animation completes at end of scroll to avoid "stuck" feeling
+  const smileyY = useTransform(scrollYProgress, [0.7, 1], ["85%", "0%"]);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const x = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
+      const y = (e.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
+      setMousePosition({
+        x: Math.max(-1, Math.min(1, x)),
+        y: Math.max(-1, Math.min(1, y)),
+      });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
+  const eyeOffsetX = mousePosition.x * 20;
+  const eyeOffsetY = mousePosition.y * 10;
+
   return (
-    <section className="relative bg-mato-green">
+    <section ref={sectionRef} className="relative bg-mato-green">
       {/* Section Title */}
       <div className="h-[20vh] flex flex-col justify-end items-center text-center">
         <motion.h2
@@ -110,25 +133,100 @@ const StepsCarousel = () => {
         </motion.h2>
       </div>
 
-      {/* Sticky Card Stack Container */}
-      <main
-        ref={containerRef}
-        className="relative flex w-full flex-col items-center justify-center pb-[30vh]"
-      >
-        {steps.map((step, i) => {
-          const targetScale = Math.max(0.85, 1 - (steps.length - i - 1) * 0.05);
-          return (
-            <StepCard
-              key={step.id}
-              i={i}
-              step={step}
-              progress={scrollYProgress}
-              range={[i * (1 / steps.length), 1]}
-              targetScale={targetScale}
-            />
-          );
-        })}
-      </main>
+      {/* Container for cards AND smiley overlay */}
+      <div ref={containerRef} className="relative">
+        {/* Cards - z-10 */}
+        <div className="relative z-10 flex w-full flex-col items-center justify-center">
+          {steps.map((step, i) => {
+            const targetScale = Math.max(
+              0.85,
+              1 - (steps.length - i - 1) * 0.05,
+            );
+            return (
+              <StepCard
+                key={step.id}
+                i={i}
+                step={step}
+                progress={scrollYProgress}
+                range={[i * (1 / steps.length), 1]}
+                targetScale={targetScale}
+              />
+            );
+          })}
+        </div>
+
+        {/* Smiley Face - sticky at bottom, z-30 to overlay cards */}
+        <motion.div
+          style={{ y: smileyY }}
+          className="sticky bottom-0 left-0 right-0 z-30 pointer-events-none"
+        >
+          {/* Proper half circle - width: 100vw (diameter), height: 50vw (radius) */}
+          <div
+            className="relative bg-mato-red flex flex-col items-center justify-center mx-auto"
+            style={{
+              width: "100vw",
+              height: "50vw",
+              borderTopLeftRadius: "50vw",
+              borderTopRightRadius: "50vw",
+            }}
+          >
+            {/* Eyes Container - positioned in center of half circle */}
+            <div className="flex gap-12 sm:gap-20 lg:gap-28 -mt-[8vw]">
+              {/* Left Eye */}
+              <motion.div
+                animate={{
+                  scaleY: [1, 0.1, 1],
+                }}
+                transition={{
+                  duration: 0.3,
+                  repeat: Infinity,
+                  repeatDelay: 2,
+                  ease: "easeInOut",
+                }}
+                className="w-[8vw] h-[8vw] max-w-24 max-h-24 bg-mato-dark-green rounded-full relative overflow-hidden"
+              >
+                <motion.div
+                  animate={{ x: eyeOffsetX, y: eyeOffsetY }}
+                  transition={{ type: "spring", stiffness: 150, damping: 15 }}
+                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[3vw] h-[3vw] max-w-8 max-h-8 bg-white rounded-full"
+                />
+              </motion.div>
+
+              {/* Right Eye */}
+              <motion.div
+                animate={{
+                  scaleY: [1, 0.1, 1],
+                }}
+                transition={{
+                  duration: 0.3,
+                  repeat: Infinity,
+                  repeatDelay: 2,
+                  ease: "easeInOut",
+                  delay: 0.05,
+                }}
+                className="w-[8vw] h-[8vw] max-w-24 max-h-24 bg-mato-dark-green rounded-full relative overflow-hidden"
+              >
+                <motion.div
+                  animate={{ x: eyeOffsetX, y: eyeOffsetY }}
+                  transition={{ type: "spring", stiffness: 150, damping: 15 }}
+                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[3vw] h-[3vw] max-w-8 max-h-8 bg-white rounded-full"
+                />
+              </motion.div>
+            </div>
+
+            {/* Smile */}
+            <div className="mt-[2vw]">
+              <div className="w-[12vw] h-[6vw] max-w-36 max-h-16 bg-mato-dark-green rounded-b-full" />
+            </div>
+          </div>
+
+          {/* Red extension below half circle */}
+          <div className="w-full bg-mato-red h-[20vh] -mt-px" />
+        </motion.div>
+
+        {/* Minimal scroll space for smiley animation */}
+        <div className="h-[5vh] bg-mato-red" />
+      </div>
     </section>
   );
 };

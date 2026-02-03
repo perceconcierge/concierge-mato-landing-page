@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
-import { Star } from 'lucide-react';
+import { motion } from "framer-motion";
+import { Star } from "lucide-react";
 
 interface Testimonial {
   id: number;
@@ -13,34 +13,37 @@ interface Testimonial {
 const testimonials: Testimonial[] = [
   {
     id: 1,
-    name: 'Sarah Chen',
-    location: 'Bangkok',
-    text: 'Mato found us the most amazing street food spot in Chinatown that we never would have discovered on our own. The tom yum was incredible!',
-    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face',
+    name: "Sarah Chen",
+    location: "Bangkok",
+    text: "Mato found us the most amazing street food spot in Chinatown that we never would have discovered on our own. The tom yum was incredible!",
+    avatar:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face",
     rating: 5,
   },
   {
     id: 2,
-    name: 'Marcus Johnson',
-    location: 'Chiang Mai',
-    text: 'I was skeptical at first, but Mato booked us a table at a rooftop restaurant with the best view of the city. Saved us hours of research!',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face',
+    name: "Marcus Johnson",
+    location: "Chiang Mai",
+    text: "I was skeptical at first, but Mato booked us a table at a rooftop restaurant with the best view of the city. Saved us hours of research!",
+    avatar:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
     rating: 5,
   },
   {
     id: 3,
-    name: 'Emma Wilson',
-    location: 'Phuket',
-    text: 'As a vegetarian traveling in Thailand, I was worried about finding good food. Mato understood exactly what I needed and found perfect spots!',
-    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face',
+    name: "Emma Wilson",
+    location: "Phuket",
+    text: "As a vegetarian traveling in Thailand, I was worried about finding good food. Mato understood exactly what I needed and found perfect spots!",
+    avatar:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face",
     rating: 5,
   },
 ];
 
 const TestimonialsSection = () => {
   return (
-    <section className="relative bg-mato-green py-20 sm:py-32 overflow-hidden">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative bg-mato-red pb-20 sm:pb-32 overflow-hidden">
+      <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -58,10 +61,13 @@ const TestimonialsSection = () => {
             className="flex justify-center gap-1 mb-4"
           >
             {[...Array(5)].map((_, i) => (
-              <Star key={i} className="w-8 h-8 sm:w-10 sm:h-10 fill-mato-yellow text-mato-yellow" />
+              <Star
+                key={i}
+                className="w-8 h-8 sm:w-10 sm:h-10 fill-mato-yellow text-mato-yellow"
+              />
             ))}
           </motion.div>
-          
+
           <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl text-white mb-2">
             LOVED BY FOODIES
           </h2>
@@ -85,7 +91,10 @@ const TestimonialsSection = () => {
               {/* Rating */}
               <div className="flex gap-1 mb-4">
                 {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 fill-mato-yellow text-mato-yellow" />
+                  <Star
+                    key={i}
+                    className="w-4 h-4 sm:w-5 sm:h-5 fill-mato-yellow text-mato-yellow"
+                  />
                 ))}
               </div>
 
@@ -104,8 +113,12 @@ const TestimonialsSection = () => {
                   />
                 </div>
                 <div>
-                  <p className="font-semibold text-mato-dark-green">{testimonial.name}</p>
-                  <p className="text-sm text-mato-dark-green/60">{testimonial.location}</p>
+                  <p className="font-semibold text-mato-dark-green">
+                    {testimonial.name}
+                  </p>
+                  <p className="text-sm text-mato-dark-green/60">
+                    {testimonial.location}
+                  </p>
                 </div>
               </div>
             </motion.div>
