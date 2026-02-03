@@ -142,7 +142,7 @@ const CardStackSection = () => {
 
       {/* Cream/white rounded sheet background */}
       <div className="bg-mato-green px-4 sm:px-6 lg:px-12">
-        <div className="bg-mato-cream rounded-t-[48px] sm:rounded-t-[64px] -mt-40 sm:-mt-48 lg:-mt-56 pt-48 sm:pt-56 lg:pt-64 pb-24 sm:pb-32 relative">
+        <div className="bg-mato-cream rounded-[48px] sm:rounded-[64px] -mt-40 sm:-mt-48 lg:-mt-56 pt-48 sm:pt-56 lg:pt-64 pb-24 sm:pb-32 relative">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}

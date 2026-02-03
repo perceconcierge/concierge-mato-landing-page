@@ -1,5 +1,5 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
+import { useRef } from "react";
 
 interface Step {
   id: number;
@@ -13,324 +13,124 @@ interface Step {
 const steps: Step[] = [
   {
     id: 1,
-    step: 'STEP 1',
-    title: 'TELL MATO WHAT YOU CRAVE',
-    description: 'Cuisine, vibe, budget, or a specific spot.',
-    image: '/images/mato/char_peeking.png',
-    color: '#FF6347',
+    step: "STEP 1",
+    title: "TELL MATO WHAT YOU CRAVE",
+    description: "Cuisine, vibe, budget, or a specific spot.",
+    image: "/images/mato/char_peeking.png",
+    color: "#FF6347",
   },
   {
     id: 2,
-    step: 'STEP 2',
-    title: 'MATO FINDS THE BEST OPTIONS',
-    description: 'Human-confirmed recommendations matching your preferences.',
-    image: '/images/mato/mato_searching.png',
-    color: '#4CAF50',
+    step: "STEP 2",
+    title: "MATO FINDS THE BEST OPTIONS",
+    description: "Human-confirmed recommendations matching your preferences.",
+    image: "/images/mato/mato_searching.png",
+    color: "#4CAF50",
   },
   {
     id: 3,
-    step: 'STEP 3',
-    title: 'LET MATO HANDLE THE REST',
-    description: 'Confirm. Mato Books. Show up.',
-    image: '/images/mato/mato_booking.png',
-    color: '#FFD54F',
+    step: "STEP 3",
+    title: "LET MATO HANDLE THE REST",
+    description: "Confirm. Mato Books. Show up.",
+    image: "/images/mato/mato_booking.png",
+    color: "#FFD54F",
   },
 ];
 
-const ITEM_WIDTH = 400;
-const ITEM_WIDTH_MOBILE = 280;
-const GAP = 30;
-const GAP_MOBILE = 15;
+interface StepCardProps {
+  i: number;
+  step: Step;
+  progress: MotionValue<number>;
+  range: [number, number];
+  targetScale: number;
+}
+
+const StepCard = ({ i, step, progress, range, targetScale }: StepCardProps) => {
+  const scale = useTransform(progress, range, [1, targetScale]);
+
+  return (
+    <div className="sticky top-0 flex h-screen items-center justify-center">
+      <motion.div
+        style={{
+          scale,
+          top: `calc(${i * 40}px)`,
+        }}
+        className="relative flex h-[500px] w-[340px] origin-top flex-col items-center overflow-hidden rounded-[32px] bg-white p-8 shadow-2xl sm:h-[550px] sm:w-[720px] sm:p-10"
+      >
+        {/* Step Number */}
+        <span
+          className="font-script text-xl sm:text-2xl mb-4"
+          style={{ color: step.color }}
+        >
+          {step.step}
+        </span>
+
+        {/* Mato Character */}
+        <div className="w-64 h-64 sm:w-72 sm:h-72 flex items-center justify-center mb-6">
+          <img
+            src={step.image}
+            alt={step.title}
+            className="w-full h-full object-contain drop-shadow-xl"
+          />
+        </div>
+
+        {/* Text Content */}
+        <div className="text-center flex-1 flex flex-col justify-start">
+          <h3 className="font-heading text-xl sm:text-2xl md:text-3xl text-mato-dark-green mb-3 leading-tight">
+            {step.title}
+          </h3>
+          <p className="text-base sm:text-lg text-mato-dark-green/70 max-w-sm mx-auto">
+            {step.description}
+          </p>
+        </div>
+      </motion.div>
+    </div>
+  );
+};
 
 const StepsCarousel = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ['start start', 'end end'],
+    offset: ["start start", "end end"],
   });
 
-  const totalDistance = (steps.length - 1) * (ITEM_WIDTH + GAP);
-  const totalDistanceMobile = (steps.length - 1) * (ITEM_WIDTH_MOBILE + GAP_MOBILE);
-
-  const x = useTransform(scrollYProgress, [0, 1], [0, -totalDistance]);
-  const xMobile = useTransform(scrollYProgress, [0, 1], [0, -totalDistanceMobile]);
-
   return (
-    <section className="steps-carousel-section">
+    <section className="relative bg-mato-green">
       {/* Section Title */}
-      <div className="intro-section">
+      <div className="h-[20vh] flex flex-col justify-end items-center text-center">
         <motion.h2
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="font-heading text-3xl sm:text-4xl md:text-5xl text-white"
+          className="font-heading text-3xl sm:text-4xl md:text-7xl text-white"
         >
           HOW IT WORKS
         </motion.h2>
       </div>
 
-      {/* Scroll Container */}
-      <div ref={containerRef} className="scroll-container">
-        <div className="sticky-wrapper">
-          {/* Desktop Gallery */}
-          <motion.div className="gallery hidden sm:flex" style={{ x }}>
-            {steps.map((step) => (
-              <div
-                key={step.id}
-                className="gallery-item"
-                style={
-                  {
-                    '--item-color': step.color,
-                  } as React.CSSProperties
-                }
-              >
-                <div className="item-image">
-                  <img
-                    src={step.image}
-                    alt={step.title}
-                    className="w-full h-auto drop-shadow-xl"
-                  />
-                </div>
-                <div className="item-content">
-                  <span className="item-step">{step.step}</span>
-                  <h3 className="item-title">{step.title}</h3>
-                  <p className="item-description">{step.description}</p>
-                </div>
-              </div>
-            ))}
-          </motion.div>
-
-          {/* Mobile Gallery */}
-          <motion.div className="gallery flex sm:hidden" style={{ x: xMobile }}>
-            {steps.map((step) => (
-              <div
-                key={step.id}
-                className="gallery-item-mobile"
-                style={
-                  {
-                    '--item-color': step.color,
-                  } as React.CSSProperties
-                }
-              >
-                <div className="item-image-mobile">
-                  <img
-                    src={step.image}
-                    alt={step.title}
-                    className="w-full h-auto drop-shadow-xl"
-                  />
-                </div>
-                <div className="item-content-mobile">
-                  <span className="item-step-mobile">{step.step}</span>
-                  <h3 className="item-title-mobile">{step.title}</h3>
-                  <p className="item-description-mobile">{step.description}</p>
-                </div>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-      </div>
-
-      <StyleSheet />
+      {/* Sticky Card Stack Container */}
+      <main
+        ref={containerRef}
+        className="relative flex w-full flex-col items-center justify-center pb-[30vh]"
+      >
+        {steps.map((step, i) => {
+          const targetScale = Math.max(0.85, 1 - (steps.length - i - 1) * 0.05);
+          return (
+            <StepCard
+              key={step.id}
+              i={i}
+              step={step}
+              progress={scrollYProgress}
+              range={[i * (1 / steps.length), 1]}
+              targetScale={targetScale}
+            />
+          );
+        })}
+      </main>
     </section>
   );
 };
-
-function StyleSheet() {
-  return (
-    <style>{`
-      .steps-carousel-section {
-        background-color: #FF6347;
-        overflow: visible;
-      }
-
-      .intro-section {
-        height: 30vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        align-items: center;
-        text-align: center;
-        padding-bottom: 40px;
-      }
-
-      .scroll-container {
-        height: 300vh;
-        position: relative;
-      }
-
-      .sticky-wrapper {
-        position: sticky;
-        top: 0;
-        height: 100vh;
-        width: ${ITEM_WIDTH}px;
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        overflow: visible;
-      }
-
-      .gallery {
-        display: flex;
-        gap: ${GAP}px;
-        will-change: transform;
-      }
-
-      .gallery-item {
-        flex-shrink: 0;
-        width: ${ITEM_WIDTH}px;
-        height: 500px;
-        border-radius: 32px;
-        position: relative;
-        overflow: hidden;
-        background: white;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 32px;
-      }
-
-      .item-image {
-        width: 200px;
-        height: 200px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 24px;
-      }
-
-      .item-image img {
-        max-width: 100%;
-        max-height: 100%;
-        object-fit: contain;
-      }
-
-      .item-content {
-        text-align: center;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-      }
-
-      .item-step {
-        font-family: 'Caveat', cursive;
-        font-size: 20px;
-        color: var(--item-color);
-        display: block;
-        margin-bottom: 12px;
-      }
-
-      .item-title {
-        font-family: 'Paytone One', sans-serif;
-        font-size: 24px;
-        font-weight: 600;
-        color: #1B5E20;
-        margin: 0 0 12px 0;
-        line-height: 1.2;
-      }
-
-      .item-description {
-        font-family: 'Inter', sans-serif;
-        font-size: 16px;
-        color: #1B5E20;
-        opacity: 0.7;
-        margin: 0;
-        line-height: 1.5;
-      }
-
-      /* Mobile styles */
-      .gallery-item-mobile {
-        flex-shrink: 0;
-        width: ${ITEM_WIDTH_MOBILE}px;
-        height: 380px;
-        border-radius: 24px;
-        position: relative;
-        overflow: hidden;
-        background: white;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 24px;
-      }
-
-      .item-image-mobile {
-        width: 140px;
-        height: 140px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 16px;
-      }
-
-      .item-image-mobile img {
-        max-width: 100%;
-        max-height: 100%;
-        object-fit: contain;
-      }
-
-      .item-content-mobile {
-        text-align: center;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-      }
-
-      .item-step-mobile {
-        font-family: 'Caveat', cursive;
-        font-size: 16px;
-        color: var(--item-color);
-        display: block;
-        margin-bottom: 8px;
-      }
-
-      .item-title-mobile {
-        font-family: 'Paytone One', sans-serif;
-        font-size: 18px;
-        font-weight: 600;
-        color: #1B5E20;
-        margin: 0 0 8px 0;
-        line-height: 1.2;
-      }
-
-      .item-description-mobile {
-        font-family: 'Inter', sans-serif;
-        font-size: 14px;
-        color: #1B5E20;
-        opacity: 0.7;
-        margin: 0;
-        line-height: 1.4;
-      }
-
-      @media (max-width: 640px) {
-        .sticky-wrapper {
-          width: ${ITEM_WIDTH_MOBILE}px;
-        }
-
-        .gallery {
-          gap: ${GAP_MOBILE}px;
-        }
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        .gallery {
-          transform: none !important;
-        }
-        .scroll-container {
-          height: auto;
-        }
-        .sticky-wrapper {
-          position: relative;
-          height: auto;
-          width: 100%;
-          overflow-x: auto;
-          padding: 50px 0;
-        }
-      }
-    `}</style>
-  );
-}
 
 export default StepsCarousel;
