@@ -11,8 +11,8 @@ const FinalCTA = () => {
     offset: ["start end", "center center"],
   });
 
-  // Face reveals from bottom as you scroll
-  const faceY = useTransform(scrollYProgress, [0, 1], ["100%", "0%"]);
+  // Face reveals from bottom as you scroll - only shows 75% of the half circle
+  const faceY = useTransform(scrollYProgress, [0, 1], ["100%", "50%"]);
   const contentOpacity = useTransform(scrollYProgress, [0.3, 0.7], [0, 1]);
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const FinalCTA = () => {
       {/* Content */}
       <motion.div
         style={{ opacity: contentOpacity }}
-        className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-80 pb-48 text-center"
+        className="relative sm:sticky sm:top-0 z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 h-screen sm:h-auto flex flex-col items-center justify-center sm:block pt-0 sm:pt-28 lg:pt-36 pb-20 text-center"
       >
         <motion.h2
           initial={{ opacity: 0, y: 40 }}
@@ -69,18 +69,27 @@ const FinalCTA = () => {
           let mato be your guide
         </motion.p>
 
-        <motion.button
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.4, duration: 0.6 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="inline-flex items-center gap-3 px-8 py-4 bg-white text-mato-red-dark rounded-full font-semibold border-2 border-mato-red/20 hover:shadow-xl transition-shadow shadow-lg"
+          className="flex justify-center"
         >
-          <Apple className="w-6 h-6" />
-          <span className="text-base">Download on the App Store</span>
-        </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.02, y: -2 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            className="group flex items-center gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-white text-mato-red-dark rounded-2xl font-semibold shadow-xl hover:shadow-2xl border-2 border-mato-red/20"
+          >
+            <Apple className="w-6 h-6 sm:w-8 sm:h-8" />
+            <div className="flex flex-col items-start">
+              <span className="text-[8px] sm:text-[10px] uppercase tracking-wider opacity-70">
+                Download on the
+              </span>
+              <span className="text-base sm:text-xl font-bold -mt-1">App Store</span>
+            </div>
+          </motion.button>
+        </motion.div>
       </motion.div>
 
       {/* Giant Blinking Half-Circle Face */}
@@ -88,9 +97,17 @@ const FinalCTA = () => {
         style={{ y: faceY }}
         className="absolute inset-x-0 bottom-0 flex items-end justify-center pointer-events-none"
       >
-        <div className="relative w-[120vw] h-[60vw] bg-mato-red rounded-t-full flex items-start justify-center pt-[8%]">
+        {/* True half circle: width = 100vw (diameter), height = 50vw (radius) */}
+        <div
+          className="relative bg-mato-red flex items-start justify-center pt-[8vw]"
+          style={{
+            width: "100vw",
+            height: "50vw",
+            borderRadius: "50vw 50vw 0 0",
+          }}
+        >
           {/* Eyes Container */}
-          <div className="flex gap-12 sm:gap-20 lg:gap-28">
+          <div className="flex gap-[10vw]">
             {/* Left Eye */}
             <motion.div
               animate={{
@@ -102,12 +119,12 @@ const FinalCTA = () => {
                 repeatDelay: 1.5,
                 ease: "easeInOut",
               }}
-              className="w-14 h-14 sm:w-20 sm:h-20 lg:w-28 lg:h-28 bg-mato-dark-green rounded-full relative overflow-hidden"
+              className="w-[8vw] h-[8vw] max-w-28 max-h-28 bg-mato-dark-green rounded-full relative overflow-hidden"
             >
               <motion.div
                 animate={{ x: eyeOffsetX, y: eyeOffsetY }}
                 transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-5 h-5 sm:w-7 sm:h-7 lg:w-9 lg:h-9 bg-white rounded-full"
+                className="absolute inset-0 m-auto w-[3vw] h-[3vw] max-w-10 max-h-10 bg-white rounded-full"
               />
             </motion.div>
 
@@ -123,19 +140,19 @@ const FinalCTA = () => {
                 ease: "easeInOut",
                 delay: 0.03,
               }}
-              className="w-14 h-14 sm:w-20 sm:h-20 lg:w-28 lg:h-28 bg-mato-dark-green rounded-full relative overflow-hidden"
+              className="w-[8vw] h-[8vw] max-w-28 max-h-28 bg-mato-dark-green rounded-full relative overflow-hidden"
             >
               <motion.div
                 animate={{ x: eyeOffsetX, y: eyeOffsetY }}
                 transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-5 h-5 sm:w-7 sm:h-7 lg:w-9 lg:h-9 bg-white rounded-full"
+                className="absolute inset-0 m-auto w-[3vw] h-[3vw] max-w-10 max-h-10 bg-white rounded-full"
               />
             </motion.div>
           </div>
 
           {/* Smile */}
-          <div className="absolute top-[25%] left-1/2 transform -translate-x-1/2">
-            <div className="w-14 h-7 sm:w-20 sm:h-10 lg:w-24 lg:h-12 bg-mato-dark-green rounded-b-full" />
+          <div className="absolute top-[18vw] left-1/2 transform -translate-x-1/2">
+            <div className="w-[8vw] h-[4vw] max-w-28 max-h-14 bg-mato-dark-green rounded-b-full" />
           </div>
         </div>
       </motion.div>

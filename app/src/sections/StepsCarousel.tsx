@@ -188,7 +188,7 @@ const StepsCarousel = () => {
                 <motion.div
                   animate={{ x: eyeOffsetX, y: eyeOffsetY }}
                   transition={{ type: "spring", stiffness: 150, damping: 15 }}
-                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[3vw] h-[3vw] max-w-8 max-h-8 bg-white rounded-full"
+                  className="absolute inset-0 m-auto w-[3vw] h-[3vw] max-w-8 max-h-8 bg-white rounded-full"
                 />
               </motion.div>
 
@@ -209,7 +209,7 @@ const StepsCarousel = () => {
                 <motion.div
                   animate={{ x: eyeOffsetX, y: eyeOffsetY }}
                   transition={{ type: "spring", stiffness: 150, damping: 15 }}
-                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[3vw] h-[3vw] max-w-8 max-h-8 bg-white rounded-full"
+                  className="absolute inset-0 m-auto w-[3vw] h-[3vw] max-w-8 max-h-8 bg-white rounded-full"
                 />
               </motion.div>
             </div>
@@ -223,9 +223,6 @@ const StepsCarousel = () => {
           {/* Red extension below half circle */}
           <div className="w-full bg-mato-red h-[20vh] -mt-px" />
         </motion.div>
-
-        {/* Minimal scroll space for smiley animation */}
-        <div className="h-[5vh] bg-mato-red" />
       </div>
     </section>
   );

@@ -42,8 +42,8 @@ const testimonials: Testimonial[] = [
 
 const TestimonialsSection = () => {
   return (
-    <section className="relative bg-mato-red pb-20 sm:pb-32 overflow-hidden">
-      <div className="max-w-6xl mx-auto">
+    <section className="relative bg-mato-red min-h-screen overflow-hidden">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}

@@ -3,7 +3,7 @@ import { Check, Apple } from "lucide-react";
 
 const PricingSection = () => {
   return (
-    <section className="relative bg-mato-cream py-20 sm:py-32 overflow-hidden">
+    <section className="relative bg-mato-cream min-h-screen py-20 sm:py-32 overflow-hidden">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -55,7 +55,7 @@ const PricingSection = () => {
             <div className="space-y-4 mb-8 text-left max-w-md mx-auto">
               {[
                 "Unlimited restaurant recommendations",
-                "Booking for any restaurant on Thailand",
+                "Booking for any restaurant in Thailand",
                 "Human-confirmed recommendations",
               ].map((feature, index) => (
                 <motion.div
