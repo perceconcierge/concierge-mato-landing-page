@@ -93,9 +93,12 @@ const CardStackSection = () => {
   ];
 
   return (
-    <section ref={sectionRef} className="relative -mt-32 sm:-mt-40 lg:-mt-48">
+    <section
+      ref={sectionRef}
+      className="relative -mt-32 sm:-mt-40 lg:-mt-48 xl:-mt-36"
+    >
       {/* Cards container - positioned to peek into the hero section */}
-      <div className="relative z-10 flex justify-center items-end h-[280px] sm:h-[320px] lg:h-[380px] pt-24 sm:pt-32 lg:pt-40">
+      <div className="relative z-10 flex justify-center items-end h-[280px] sm:h-[320px] lg:h-[380px] xl:h-[340px] pt-24 sm:pt-32 lg:pt-40 xl:pt-32">
         {cards.map((card, index) => (
           <motion.div
             key={index}
@@ -141,8 +144,8 @@ const CardStackSection = () => {
       </div>
 
       {/* Cream/white rounded sheet background */}
-      <div className="bg-mato-green px-4 sm:px-6 lg:px-12">
-        <div className="bg-mato-cream rounded-[48px] sm:rounded-[64px] -mt-40 sm:-mt-48 lg:-mt-56 pt-48 sm:pt-56 lg:pt-64 pb-24 sm:pb-32 relative">
+      <div className="bg-mato-green px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto bg-mato-cream rounded-[48px] sm:rounded-[64px] -mt-40 sm:-mt-48 lg:-mt-56 pt-48 sm:pt-56 lg:pt-64 pb-24 sm:pb-32 relative">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}

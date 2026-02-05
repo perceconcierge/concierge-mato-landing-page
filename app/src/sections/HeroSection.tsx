@@ -74,7 +74,7 @@ const HeroSection = () => {
           <img
             src="/images/mato/char_hero.png"
             alt="Mato hero"
-            className="w-64 sm:w-80 lg:w-96 xl:w-[450px] h-auto drop-shadow-2xl"
+            className="w-64 sm:w-80 lg:w-96 xl:w-[450px] h-auto drop-shadow-2xl animate-float"
           />
         </motion.div>
       </div>
