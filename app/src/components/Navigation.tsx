@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
 import { Mail, Download } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Navigation = () => {
+  const navigate = useNavigate();
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -36,7 +39,7 @@ const Navigation = () => {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => scrollToSection("contact")}
+            onClick={() => navigate("/contact")}
             className="flex items-center justify-center w-10 h-10 sm:w-auto sm:h-auto sm:px-5 sm:py-2 bg-white/90 backdrop-blur-sm text-mato-green-dark rounded-full text-sm font-semibold uppercase tracking-wide border-2 border-mato-green/50 hover:bg-white hover:border-mato-green transition-all shadow-md"
           >
             <Mail className="w-5 h-5 sm:hidden" />

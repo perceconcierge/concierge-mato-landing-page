@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import SmoothScrollProvider from './components/SmoothScrollProvider';
 import LogoReveal from './sections/LogoReveal';
@@ -9,8 +10,9 @@ import StepsCarousel from './sections/StepsCarousel';
 import TestimonialsSection from './sections/TestimonialsSection';
 import PricingSection from './sections/PricingSection';
 import FinalCTA from './sections/FinalCTA';
+import ContactPage from './pages/ContactPage';
 
-function App() {
+function LandingPage() {
   const [showLogoReveal, setShowLogoReveal] = useState(true);
 
   useEffect(() => {
@@ -49,6 +51,17 @@ function App() {
         </main>
       </div>
     </SmoothScrollProvider>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
