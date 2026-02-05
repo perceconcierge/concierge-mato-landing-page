@@ -55,7 +55,7 @@ const StepCard = ({ i, step, progress, range, targetScale }: StepCardProps) => {
           scale,
           top: `calc(${i * 40}px)`,
         }}
-        className="relative flex h-[500px] w-[340px] origin-top flex-col items-center overflow-hidden rounded-[32px] bg-white p-8 shadow-2xl sm:h-[550px] sm:w-[720px] sm:p-10"
+        className="relative flex h-[500px] w-[calc(100vw-32px)] max-w-[340px] origin-top flex-col items-center overflow-hidden rounded-[32px] bg-white p-6 shadow-2xl sm:h-[550px] sm:max-w-[720px] sm:p-10"
       >
         {/* Step Number */}
         <span
