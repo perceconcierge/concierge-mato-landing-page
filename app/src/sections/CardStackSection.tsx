@@ -1,8 +1,22 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 
 const CardStackSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const [spreadMultiplier, setSpreadMultiplier] = useState(1);
+
+  useEffect(() => {
+    const updateSpread = () => {
+      const width = window.innerWidth;
+      if (width < 640) setSpreadMultiplier(0.35);
+      else if (width < 1024) setSpreadMultiplier(0.6);
+      else setSpreadMultiplier(1);
+    };
+    updateSpread();
+    window.addEventListener("resize", updateSpread);
+    return () => window.removeEventListener("resize", updateSpread);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
@@ -13,7 +27,7 @@ const CardStackSection = () => {
   const card1X = useTransform(
     scrollYProgress,
     [0.05, 0.25, 0.45],
-    [0, -120, -280],
+    [0, -120 * spreadMultiplier, -280 * spreadMultiplier],
   );
   const card1Rotate = useTransform(
     scrollYProgress,
@@ -26,7 +40,7 @@ const CardStackSection = () => {
   const card2X = useTransform(
     scrollYProgress,
     [0.05, 0.25, 0.45],
-    [0, -40, -95],
+    [0, -40 * spreadMultiplier, -95 * spreadMultiplier],
   );
   const card2Rotate = useTransform(
     scrollYProgress,
@@ -36,7 +50,7 @@ const CardStackSection = () => {
   const card2Y = useTransform(scrollYProgress, [0.05, 0.25, 0.45], [0, 5, 15]);
 
   // Card 3 - Right of center
-  const card3X = useTransform(scrollYProgress, [0.05, 0.25, 0.45], [0, 40, 95]);
+  const card3X = useTransform(scrollYProgress, [0.05, 0.25, 0.45], [0, 40 * spreadMultiplier, 95 * spreadMultiplier]);
   const card3Rotate = useTransform(
     scrollYProgress,
     [0.05, 0.25, 0.45],
@@ -48,7 +62,7 @@ const CardStackSection = () => {
   const card4X = useTransform(
     scrollYProgress,
     [0.05, 0.25, 0.45],
-    [0, 120, 280],
+    [0, 120 * spreadMultiplier, 280 * spreadMultiplier],
   );
   const card4Rotate = useTransform(
     scrollYProgress,
@@ -95,7 +109,7 @@ const CardStackSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative -mt-32 sm:-mt-40 lg:-mt-48 xl:-mt-36"
+      className="relative mt-0 lg:-mt-48 xl:-mt-36 bg-mato-green"
     >
       {/* Cards container - positioned to peek into the hero section */}
       <div className="relative z-10 flex justify-center items-end h-[280px] sm:h-[320px] lg:h-[380px] xl:h-[340px] pt-24 sm:pt-32 lg:pt-40 xl:pt-32">
@@ -145,7 +159,7 @@ const CardStackSection = () => {
 
       {/* Cream/white rounded sheet background */}
       <div className="bg-mato-green px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto bg-mato-cream rounded-[48px] sm:rounded-[64px] -mt-40 sm:-mt-48 lg:-mt-56 pt-48 sm:pt-56 lg:pt-64 pb-24 sm:pb-32 relative">
+        <div className="max-w-7xl mx-auto bg-mato-cream rounded-[48px] sm:rounded-[64px] -mt-20 lg:-mt-56 pt-28 lg:pt-64 pb-24 sm:pb-32 relative">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}

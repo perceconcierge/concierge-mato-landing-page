@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Mail, Download } from "lucide-react";
 
 const Navigation = () => {
   const scrollToSection = (id: string) => {
@@ -26,7 +27,7 @@ const Navigation = () => {
           <img
             src="/images/logo/Mato Logo.png"
             alt="Mato Logo"
-            className="h-18 sm:h-20 w-auto"
+            className="h-12 sm:h-16 lg:h-20 w-auto"
           />
         </motion.div>
 
@@ -36,17 +37,19 @@ const Navigation = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => scrollToSection("contact")}
-            className="px-4 sm:px-5 py-2 bg-white/90 backdrop-blur-sm text-mato-green-dark rounded-full text-xs sm:text-sm font-semibold uppercase tracking-wide border-2 border-mato-green/50 hover:bg-white hover:border-mato-green transition-all shadow-md"
+            className="flex items-center justify-center w-10 h-10 sm:w-auto sm:h-auto sm:px-5 sm:py-2 bg-white/90 backdrop-blur-sm text-mato-green-dark rounded-full text-sm font-semibold uppercase tracking-wide border-2 border-mato-green/50 hover:bg-white hover:border-mato-green transition-all shadow-md"
           >
-            Contact
+            <Mail className="w-5 h-5 sm:hidden" />
+            <span className="hidden sm:inline">Contact</span>
           </motion.button>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => scrollToSection("download")}
-            className="px-4 sm:px-5 py-2 bg-mato-red text-white rounded-full text-xs sm:text-sm font-semibold uppercase tracking-wide border-2 border-mato-red-dark hover:bg-mato-red-dark transition-all shadow-md"
+            className="flex items-center justify-center w-10 h-10 sm:w-auto sm:h-auto sm:px-5 sm:py-2 bg-mato-red text-white rounded-full text-sm font-semibold uppercase tracking-wide border-2 border-mato-red-dark hover:bg-mato-red-dark transition-all shadow-md"
           >
-            Download
+            <Download className="w-5 h-5 sm:hidden" />
+            <span className="hidden sm:inline">Download</span>
           </motion.button>
         </div>
       </div>

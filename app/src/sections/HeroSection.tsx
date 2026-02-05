@@ -3,9 +3,9 @@ import { Apple } from "lucide-react";
 
 const HeroSection = () => {
   return (
-    <section id="hero" className="relative min-h-screen lg:h-screen bg-mato-green overflow-visible pt-12 pb-8 lg:pb-0">
+    <section id="hero" className="relative min-h-screen bg-mato-green overflow-visible">
       {/* Main Content - Side by side layout */}
-      <div className="relative z-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-8 lg:h-[calc(100vh-5rem)] flex flex-col lg:flex-row items-center gap-0 lg:gap-0">
+      <div className="relative z-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex flex-col lg:flex-row items-center justify-center pt-20 sm:pt-24 pb-8">
         {/* Text Content - Left side */}
         <div className="flex-1 lg:pr-0">
           {/* Script Text */}
@@ -23,7 +23,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 2.95, duration: 0.8, ease: "easeOut" }}
-            className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-white text-center lg:text-left leading-[0.95] mb-6 sm:mb-8"
+            className="font-heading text-4xl sm:text-5xl md:text-5xl lg:text-7xl xl:text-8xl text-white text-center lg:text-left leading-[0.95] mb-4 sm:mb-6 lg:mb-8"
           >
             YOUR AI FOOD
             <br />
@@ -35,7 +35,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 3.1, duration: 0.8, ease: "easeOut" }}
-            className="font-subtext text-xl sm:text-2xl md:text-3xl text-white/95 font-medium tracking-wide text-center lg:text-left max-w-xl mb-6 sm:mb-8"
+            className="font-subtext text-xl sm:text-2xl md:text-2xl text-white/95 font-medium tracking-wide text-center lg:text-left max-w-xl mb-4 sm:mb-6 lg:mb-8"
           >
             Discover and book any table in Thailand.
           </motion.p>
@@ -69,12 +69,12 @@ const HeroSection = () => {
           initial={{ opacity: 0, x: 100 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 3.5, duration: 0.8, ease: "easeOut" }}
-          className="flex-shrink-0 flex justify-center lg:justify-end items-end mt-4 lg:mt-0 lg:-ml-8"
+          className="flex-shrink-0 flex justify-center lg:justify-end items-center mt-6 sm:mt-4 lg:mt-0 lg:-ml-8"
         >
           <img
             src="/images/mato/char_hero.png"
             alt="Mato hero"
-            className="w-64 sm:w-80 lg:w-96 xl:w-[450px] h-auto drop-shadow-2xl animate-float"
+            className="w-56 sm:w-64 md:w-72 lg:w-96 xl:w-[450px] h-auto drop-shadow-2xl animate-float"
           />
         </motion.div>
       </div>

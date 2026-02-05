@@ -42,7 +42,7 @@ const testimonials: Testimonial[] = [
 
 const TestimonialsSection = () => {
   return (
-    <section className="relative bg-mato-red min-h-screen overflow-hidden">
+    <section className="relative bg-mato-red min-h-screen overflow-hidden py-16 sm:py-20 lg:py-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
