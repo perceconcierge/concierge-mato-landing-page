@@ -31,7 +31,7 @@ const steps: Step[] = [
     id: 3,
     step: "STEP 3",
     title: "LET MATO HANDLE THE REST",
-    description: "Confirm. Mato Books. Show up.",
+    description: "Mato books or finds someone to Q. Show up.",
     image: "/images/mato/mato_booking.png",
     color: "#FFD54F",
   },
@@ -99,7 +99,7 @@ const StepsCarousel = () => {
   });
 
   // Smiley rises from bottom - animation completes at end of scroll to avoid "stuck" feeling
-  const smileyY = useTransform(scrollYProgress, [0.7, 1], ["90%", "0%"]);
+  const smileyY = useTransform(scrollYProgress, [0.75, 1], ["100%", "0%"]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {

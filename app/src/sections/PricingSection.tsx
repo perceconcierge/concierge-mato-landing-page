@@ -55,10 +55,8 @@ const PricingSection = () => {
             <div className="space-y-4 mb-8 text-left max-w-md mx-auto">
               {[
                 "Unlimited restaurant recommendations",
-                "Human-confirmed availability",
-                "Instant booking confirmation",
-                "24/7 concierge support",
-                "Local insider tips",
+                "Booking for any restaurant on Thailand",
+                "Human-confirmed recommendations",
               ].map((feature, index) => (
                 <motion.div
                   key={index}

@@ -3,7 +3,7 @@ import { Apple } from "lucide-react";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen lg:h-screen bg-mato-green overflow-visible pt-12 pb-8 lg:pb-0">
+    <section id="hero" className="relative min-h-screen lg:h-screen bg-mato-green overflow-visible pt-12 pb-8 lg:pb-0">
       {/* Main Content - Side by side layout */}
       <div className="relative z-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-8 lg:h-[calc(100vh-5rem)] flex flex-col lg:flex-row items-center gap-0 lg:gap-0">
         {/* Text Content - Left side */}

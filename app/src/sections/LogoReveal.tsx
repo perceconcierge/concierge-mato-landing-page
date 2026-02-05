@@ -1,11 +1,11 @@
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 interface LogoRevealProps {
   onComplete?: () => void;
 }
 
 const LogoReveal = ({ onComplete }: LogoRevealProps) => {
-  const letters = ['m', 'a', 't', 'o'];
+  const letters = ["m", "a", "t", "o"];
 
   const containerVariants = {
     hidden: { opacity: 1 },
@@ -19,7 +19,7 @@ const LogoReveal = ({ onComplete }: LogoRevealProps) => {
   };
 
   const letterVariants = {
-    hidden: { 
+    hidden: {
       y: 300,
       opacity: 0,
     },
@@ -27,7 +27,7 @@ const LogoReveal = ({ onComplete }: LogoRevealProps) => {
       y: 0,
       opacity: 1,
       transition: {
-        type: 'spring' as const,
+        type: "spring" as const,
         damping: 12,
         stiffness: 100,
       },
@@ -35,7 +35,7 @@ const LogoReveal = ({ onComplete }: LogoRevealProps) => {
   };
 
   return (
-    <div 
+    <div
       className="w-full h-screen bg-mato-red flex items-end justify-center pb-20 overflow-hidden"
       onClick={onComplete}
     >
@@ -50,9 +50,9 @@ const LogoReveal = ({ onComplete }: LogoRevealProps) => {
             key={index}
             variants={letterVariants}
             className="text-[20vw] sm:text-[25vw] font-heading text-white leading-none relative"
-            style={{ 
-              marginRight: '-0.05em',
-              textShadow: '4px 4px 0px rgba(0,0,0,0.1)',
+            style={{
+              marginRight: "-0.05em",
+              textShadow: "4px 4px 0px rgba(0,0,0,0.1)",
             }}
           >
             {letter}

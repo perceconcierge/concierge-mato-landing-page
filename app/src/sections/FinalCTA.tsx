@@ -64,7 +64,7 @@ const FinalCTA = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2, duration: 0.6 }}
-          className="font-script text-xl sm:text-2xl text-white/80 mb-10"
+          className="font-handwritten text-3xl sm:text-5xl text-white/80 mb-10"
         >
           let mato be your guide
         </motion.p>
